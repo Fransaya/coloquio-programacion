@@ -232,6 +232,29 @@ body {
   font-size: 1rem;
 }
 
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+
+.loading-spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid #e1e5e9;
+  border-top: 8px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Animaciones */
 @keyframes fadeInDown {
   from {

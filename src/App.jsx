@@ -8,6 +8,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [history, setHistory] = useState([]);
+  const [loadingQuestion, setLoadingQuestion] = useState(false);
 
   // Funcion para validar la pregunta - debe empezar con "¿" y terminar con "?" o terminar con "?"
   const isValidQuestion = (text) => {
@@ -36,6 +37,8 @@ function App() {
     // Reiniciar estados - errores y loading
     setError("");
     setLoading(true);
+    setResponse(null);
+    setLoadingQuestion(true);
 
     // Envio request a la API
     try {
@@ -47,6 +50,7 @@ function App() {
         timestamp: new Date().toLocaleTimeString(),
       };
 
+      setLoadingQuestion(false);
       setResponse(newResponse);
       setHistory((prev) => [newResponse, ...prev.slice(0, 4)]);
       setQuestion("");
@@ -115,6 +119,21 @@ function App() {
               </div>
               {error && <p className="error">{error}</p>}
             </form>
+
+            {loadingQuestion && (
+              <div className="loading loading-attractive">
+                <p className="loading-text">Consultando el universo...</p>
+                <img
+                  src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+                  alt="Cargando..."
+                  className="spinner-gif"
+                  style={{ width: 80, height: 80, margin: "16px auto" }}
+                />
+                <p className="loading-subtext">
+                  ¡La bola mágica está pensando!
+                </p>
+              </div>
+            )}
 
             {response && (
               <div className="response-container">
